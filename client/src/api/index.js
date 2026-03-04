@@ -29,6 +29,19 @@ export const postAnswer = (id, noOfAnswers, answerBody, userAnswered) =>
 export const deleteAnswer = (id, answerId, noOfAnswers) =>
   API.patch(`/answer/delete/${id}`, { answerId, noOfAnswers });
 
+export const voteAnswer = (id, answerId, value) =>
+  API.patch(`/questions/vote/${id}/${answerId}`, { value });
+export const acceptAnswer = (id, answerId) =>
+  API.patch(`/questions/accept/${id}/${answerId}`);
+
+export const postQuestionComment = (id, commentBody, userCommented) =>
+  API.patch(`/comments/question/${id}/post`, { commentBody, userCommented });
+export const deleteQuestionComment = (id, commentId) =>
+  API.patch(`/comments/question/${id}/delete`, { commentId });
+export const postAnswerComment = (id, answerId, commentBody, userCommented) =>
+  API.patch(`/comments/answer/${id}/${answerId}/post`, { commentBody, userCommented });
+export const deleteAnswerComment = (id, answerId, commentId) =>
+  API.patch(`/comments/answer/${id}/${answerId}/delete`, { commentId });
 export const getAllUsers = () => API.get("/user/getAllUsers");
 export const searchUsers = (query, limit = 10, skip = 0) =>
   API.get(`/user/search?query=${query}&limit=${limit}&skip=${skip}`);

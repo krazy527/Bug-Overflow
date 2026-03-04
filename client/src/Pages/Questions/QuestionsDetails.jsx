@@ -14,7 +14,74 @@ import {
   postAnswer,
   deleteQuestion,
   voteQuestion,
+  postQuestionComment,
+  deleteQuestionComment,
 } from "../../actions/question";
+
+const CommentSection = ({ comments, onAddComment, onDeleteComment, currentUser }) => {
+  const [commentText, setCommentText] = useState("");
+  const [showForm, setShowForm] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (commentText.trim()) {
+      onAddComment(commentText.trim());
+      setCommentText("");
+      setShowForm(false);
+    }
+  };
+
+  return (
+    <div className="comment-section">
+      {comments && comments.length > 0 && (
+        <div className="comments-list">
+          {comments.map((comment) => (
+            <div key={comment._id} className="comment-item">
+              <span className="comment-body">{comment.commentBody}</span>
+              <span className="comment-meta">
+                {" – "}
+                <Link to={`/Users/${comment.userId}`} className="comment-user">
+                  {comment.userCommented}
+                </Link>
+                {" "}
+                <span className="comment-time">{moment(comment.commentedOn).fromNow()}</span>
+                {currentUser?.result?._id === comment.userId && (
+                  <button
+                    type="button"
+                    className="comment-delete-btn"
+                    onClick={() => onDeleteComment(comment._id)}
+                  >
+                    ×
+                  </button>
+                )}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+      {showForm ? (
+        <form className="comment-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            placeholder="Add a comment..."
+            className="comment-input"
+            maxLength={600}
+          />
+          <button type="submit" className="comment-submit-btn">Add Comment</button>
+          <button type="button" className="comment-cancel-btn" onClick={() => setShowForm(false)}>Cancel</button>
+        </form>
+      ) : (
+        currentUser && (
+          <button type="button" className="add-comment-btn" onClick={() => setShowForm(true)}>
+            Add a comment
+          </button>
+        )
+      )}
+    </div>
+  );
+};
 
 const QuestionsDetails = () => {
   const { id } = useParams();
@@ -75,6 +142,19 @@ const QuestionsDetails = () => {
     } else {
       dispatch(voteQuestion(id, "downVote"));
     }
+  };
+
+  const handleAddQuestionComment = (commentBody, question) => {
+    if (User === null) {
+      alert("Login or Signup to comment");
+      Navigate("/Auth");
+      return;
+    }
+    dispatch(postQuestionComment({ id: question._id, commentBody, userCommented: User.result.name }));
+  };
+
+  const handleDeleteQuestionComment = (question, commentId) => {
+    dispatch(deleteQuestionComment(question._id, commentId));
   };
 
   return (
@@ -154,6 +234,12 @@ const QuestionsDetails = () => {
                           </Link>
                         </div>
                       </div>
+                      <CommentSection
+                        comments={question.comments || []}
+                        onAddComment={(commentBody) => handleAddQuestionComment(commentBody, question)}
+                        onDeleteComment={(commentId) => handleDeleteQuestionComment(question, commentId)}
+                        currentUser={User}
+                      />
                     </div>
                   </div>
                 </section>

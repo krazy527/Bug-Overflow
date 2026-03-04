@@ -40,6 +40,9 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
                   <FontAwesomeIcon icon={faBirthdayCake} /> Joined{" "}
                   {moment(currentProfile?.joinedOn).fromNow()}
                 </p>
+                <p className="user-reputation">
+                  ⭐ {currentProfile?.reputation || 0} reputation
+                </p>
               </div>
             </div>
             {currentUser?.result._id === id && (

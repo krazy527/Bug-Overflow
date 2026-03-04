@@ -12,6 +12,7 @@ export const getAllUsers = async (req, res) => {
         about: user.about,
         tags: user.tags,
         joinedOn: user.joinedOn,
+        reputation: user.reputation || 0,
       });
     });
     res.status(200).json(allUserDetails);

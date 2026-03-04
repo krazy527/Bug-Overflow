@@ -1,5 +1,12 @@
 import mongoose from "mongoose";
 
+const commentSchema = {
+  commentBody: String,
+  userCommented: String,
+  userId: String,
+  commentedOn: { type: Date, default: Date.now },
+};
+
 const QuestionSchema = mongoose.Schema({
   questionTitle: { type: String, required: "Question must have a title" },
   questionBody: { type: String, required: "Question must have a body" },
@@ -10,12 +17,17 @@ const QuestionSchema = mongoose.Schema({
   userPosted: { type: String, required: "Question must have an author" },
   userId: { type: String },
   askedOn: { type: Date, default: Date.now },
+  comments: { type: [commentSchema], default: [] },
   answer: [
     {
       answerBody: String,
       userAnswered: String,
       userId: String,
       answeredOn: { type: Date, default: Date.now },
+      upVote: { type: [String], default: [] },
+      downVote: { type: [String], default: [] },
+      isAccepted: { type: Boolean, default: false },
+      comments: { type: [commentSchema], default: [] },
     },
   ],
 });
