@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import decode from "jwt-decode";
@@ -9,11 +9,14 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Navbar.css";
 import { setCurrentUser } from "../../actions/currentUser";
 import bars from "../../assets/bars-solid.svg";
+import { fetchNotifications, markAllNotificationsRead } from "../../actions/notifications";
 
-const Navbar = ({ handleSlideIn }) => {
+const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
   const dispatch = useDispatch();
   var User = useSelector((state) => state.currentUserReducer);
+  const notifications = useSelector((state) => state.notificationsReducer);
   const navigate = useNavigate();
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const handleLogout = () => {
     dispatch({ type: "LOGOUT" });
@@ -31,6 +34,24 @@ const Navbar = ({ handleSlideIn }) => {
     }
     dispatch(setCurrentUser(JSON.parse(localStorage.getItem("Profile"))));
   }, [User?.token, dispatch]);
+
+  // Poll for notifications every 30 seconds when logged in
+  useEffect(() => {
+    if (User?.token) {
+      dispatch(fetchNotifications());
+      const interval = setInterval(() => {
+        dispatch(fetchNotifications());
+      }, 30000);
+      return () => clearInterval(interval);
+    }
+  }, [User?.token, dispatch]);
+
+  const handleNotificationClick = () => {
+    setShowNotifications(!showNotifications);
+    if (!showNotifications && notifications.unreadCount > 0) {
+      dispatch(markAllNotificationsRead());
+    }
+  };
 
   return (
     <nav className="main-nav">
@@ -54,12 +75,58 @@ const Navbar = ({ handleSlideIn }) => {
           <SearchBar />
         </div>
         <div className="navbar-2">
+          <button
+            className="dark-mode-toggle"
+            onClick={() => setDarkMode && setDarkMode(!darkMode)}
+            title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
+          >
+            {darkMode ? "☀️" : "🌙"}
+          </button>
           {User === null ? (
             <Link to="/Auth" className="nav-item nav-links">
               Log in
             </Link>
           ) : (
             <>
+              <div className="notification-container">
+                <button
+                  className="notification-btn"
+                  onClick={handleNotificationClick}
+                  title="Notifications"
+                >
+                  🔔
+                  {notifications.unreadCount > 0 && (
+                    <span className="notification-badge">
+                      {notifications.unreadCount > 9 ? "9+" : notifications.unreadCount}
+                    </span>
+                  )}
+                </button>
+                {showNotifications && (
+                  <div className="notification-dropdown">
+                    <div className="notification-header">
+                      <h4>Notifications</h4>
+                    </div>
+                    {notifications.data.length === 0 ? (
+                      <p className="no-notifications">No notifications</p>
+                    ) : (
+                      <div className="notification-list">
+                        {notifications.data.slice(0, 10).map((notif) => (
+                          <div
+                            key={notif._id}
+                            className={`notification-item ${!notif.read ? "unread" : ""}`}
+                            onClick={() => {
+                              if (notif.link) navigate(notif.link);
+                              setShowNotifications(false);
+                            }}
+                          >
+                            <p>{notif.message}</p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
               <Avatar
                 backgroundColor="#009dff"
                 px="10px"

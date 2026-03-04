@@ -63,3 +63,66 @@ export const deleteAnswer = (id, answerId, noOfAnswers) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const acceptAnswer = (questionId, answerId) => async (dispatch) => {
+  try {
+    await api.acceptAnswer(questionId, answerId);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const voteAnswer = (questionId, answerId, value) => async (dispatch) => {
+  try {
+    await api.voteAnswer(questionId, answerId, value);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const incrementView = (questionId) => async (dispatch) => {
+  try {
+    await api.incrementView(questionId);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addQuestionComment = (questionId, commentBody) => async (dispatch) => {
+  try {
+    await api.addQuestionComment(questionId, commentBody);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const addAnswerComment = (questionId, answerId, commentBody) => async (dispatch) => {
+  try {
+    await api.addAnswerComment(questionId, answerId, commentBody);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteQuestionComment = (questionId, commentId) => async (dispatch) => {
+  try {
+    await api.deleteQuestionComment(questionId, commentId);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const deleteAnswerComment = (questionId, answerId, commentId) => async (dispatch) => {
+  try {
+    await api.deleteAnswerComment(questionId, answerId, commentId);
+    dispatch(fetchAllQuestions());
+  } catch (error) {
+    console.log(error);
+  }
+};

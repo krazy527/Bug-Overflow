@@ -3,10 +3,14 @@ import authReducer from "./auth";
 import currentUserReducer from "./currentUser";
 import questionsReducer from "./questions";
 import usersReducer from "./users";
+import notificationsReducer from "./notifications";
+import bookmarksReducer from "./bookmarks";
 
 export default combineReducers({
   authReducer,
   currentUserReducer,
   questionsReducer,
   usersReducer,
+  notificationsReducer,
+  bookmarksReducer,
 });
