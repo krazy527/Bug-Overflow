@@ -175,15 +175,23 @@ const QuestionsDetails = () => {
                         src={upvote}
                         alt=""
                         width="18"
-                        className="votes-icon"
+                        className={`votes-icon ${
+                          (question.upVote || []).includes(User?.result?._id)
+                            ? "vote-up-active"
+                            : ""
+                        }`}
                         onClick={handleUpVote}
                       />
-                      <p>{question.upVote.length - question.downVote.length}</p>
+                      <p>{(question.upVote?.length || 0) - (question.downVote?.length || 0)}</p>
                       <img
                         src={downvote}
                         alt=""
                         width="18"
-                        className="votes-icon"
+                        className={`votes-icon ${
+                          (question.downVote || []).includes(User?.result?._id)
+                            ? "vote-down-active"
+                            : ""
+                        }`}
                         onClick={handleDownVote}
                       />
                     </div>

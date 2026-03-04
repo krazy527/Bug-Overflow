@@ -93,6 +93,18 @@ export const voteQuestion = async (req, res) => {
 
   try {
     const question = await Questions.findById(_id);
+    if (!question) {
+      return res.status(404).json({ message: "question not found" });
+    }
+
+    question.upVote = Array.isArray(question.upVote) ? question.upVote : [];
+    question.downVote = Array.isArray(question.downVote) ? question.downVote : [];
+
+    const normalizedValue = String(value || "").toLowerCase();
+    if (!["upvote", "downvote"].includes(normalizedValue)) {
+      return res.status(400).json({ message: "invalid vote value" });
+    }
+
     const upIndex = question.upVote.findIndex((id) => id === String(userId));
     const downIndex = question.downVote.findIndex(
       (id) => id === String(userId)
@@ -100,7 +112,7 @@ export const voteQuestion = async (req, res) => {
 
     let repDelta = 0;
 
-    if (value === "upVote") {
+    if (normalizedValue === "upvote") {
       if (downIndex !== -1) {
         question.downVote = question.downVote.filter(
           (id) => id !== String(userId)
@@ -114,7 +126,7 @@ export const voteQuestion = async (req, res) => {
         question.upVote = question.upVote.filter((id) => id !== String(userId));
         repDelta -= 5; // undo upvote
       }
-    } else if (value === "downVote") {
+    } else if (normalizedValue === "downvote") {
       if (upIndex !== -1) {
         question.upVote = question.upVote.filter((id) => id !== String(userId));
         repDelta -= 5; // undo upvote
@@ -130,9 +142,13 @@ export const voteQuestion = async (req, res) => {
       }
     }
 
-    await Questions.findByIdAndUpdate(_id, question);
+    await question.save();
     await updateReputation(question.userId, repDelta);
-    res.status(200).json({ message: "voted successfully..." });
+    res.status(200).json({
+      message: "voted successfully...",
+      upVoteCount: question.upVote.length,
+      downVoteCount: question.downVote.length,
+    });
   } catch (error) {
     res.status(404).json({ message: "id not found" });
   }
@@ -149,6 +165,15 @@ export const voteAnswer = async (req, res) => {
 
   try {
     const question = await Questions.findById(_id);
+    if (!question) {
+      return res.status(404).json({ message: "question not found" });
+    }
+
+    const normalizedValue = String(value || "").toLowerCase();
+    if (!["upvote", "downvote"].includes(normalizedValue)) {
+      return res.status(400).json({ message: "invalid vote value" });
+    }
+
     const answerIndex = question.answer.findIndex(
       (a) => a._id.toString() === answerId
     );
@@ -158,12 +183,14 @@ export const voteAnswer = async (req, res) => {
     }
 
     const answer = question.answer[answerIndex];
+    answer.upVote = Array.isArray(answer.upVote) ? answer.upVote : [];
+    answer.downVote = Array.isArray(answer.downVote) ? answer.downVote : [];
     const upIndex = answer.upVote.findIndex((id) => id === String(userId));
     const downIndex = answer.downVote.findIndex((id) => id === String(userId));
 
     let repDelta = 0;
 
-    if (value === "upVote") {
+    if (normalizedValue === "upvote") {
       if (downIndex !== -1) {
         answer.downVote = answer.downVote.filter((id) => id !== String(userId));
         repDelta += 2;
@@ -175,7 +202,7 @@ export const voteAnswer = async (req, res) => {
         answer.upVote = answer.upVote.filter((id) => id !== String(userId));
         repDelta -= 10;
       }
-    } else if (value === "downVote") {
+    } else if (normalizedValue === "downvote") {
       if (upIndex !== -1) {
         answer.upVote = answer.upVote.filter((id) => id !== String(userId));
         repDelta -= 10;
@@ -192,7 +219,11 @@ export const voteAnswer = async (req, res) => {
     question.answer[answerIndex] = answer;
     await question.save();
     await updateReputation(answer.userId, repDelta);
-    res.status(200).json({ message: "voted successfully..." });
+    res.status(200).json({
+      message: "voted successfully...",
+      upVoteCount: answer.upVote.length,
+      downVoteCount: answer.downVote.length,
+    });
   } catch (error) {
     res.status(404).json({ message: "id not found" });
   }

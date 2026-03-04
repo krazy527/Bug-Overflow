@@ -128,7 +128,11 @@ const DisplayAnswer = ({ question, handleShare }) => {
                 src={upvote}
                 alt="upvote"
                 width="18"
-                className="votes-icon"
+                className={`votes-icon ${
+                  (ans.upVote || []).includes(User?.result?._id)
+                    ? "vote-up-active"
+                    : ""
+                }`}
                 onClick={() => handleUpVote(ans._id)}
               />
               <p>{(ans.upVote?.length || 0) - (ans.downVote?.length || 0)}</p>
@@ -136,7 +140,11 @@ const DisplayAnswer = ({ question, handleShare }) => {
                 src={downvote}
                 alt="downvote"
                 width="18"
-                className="votes-icon"
+                className={`votes-icon ${
+                  (ans.downVote || []).includes(User?.result?._id)
+                    ? "vote-down-active"
+                    : ""
+                }`}
                 onClick={() => handleDownVote(ans._id)}
               />
               {User?.result?._id === question?.userId && (

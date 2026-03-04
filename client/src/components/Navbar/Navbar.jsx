@@ -60,20 +60,20 @@ const Navbar = ({ handleSlideIn }) => {
             </Link>
           ) : (
             <>
-              <Avatar
-                backgroundColor="#009dff"
-                px="10px"
-                py="7px"
-                borderRadius="50%"
-                color="white"
+              <Link
+                to={`/Users/${User?.result?._id}`}
+                style={{ color: "white", textDecoration: "none" }}
               >
-                <Link
-                  to={`/Users/${User?.result?._id}`}
-                  style={{ color: "white", textDecoration: "none" }}
+                <Avatar
+                  backgroundColor="#009dff"
+                  px="12px"
+                  py="7px"
+                  borderRadius="50%"
+                  color="white"
                 >
                   {User.result.name.charAt(0).toUpperCase()}
-                </Link>
-              </Avatar>
+                </Avatar>
+              </Link>
               <button className="nav-item nav-links" style={{marginLeft: 10}} onClick={handleLogout}>
                 Log out
               </button>
