@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import rateLimit from "express-rate-limit";
 
 import userRoutes from "./routes/users.js";
 import questionRoutes from "./routes/Questions.js";
@@ -15,10 +16,18 @@ app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
-app.use("/user", userRoutes);
-app.use("/questions", questionRoutes);
-app.use("/answer", answerRoutes);
-app.use("/comments", commentRoutes);
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many requests, please try again later." },
+});
+
+app.use("/user", apiLimiter, userRoutes);
+app.use("/questions", apiLimiter, questionRoutes);
+app.use("/answer", apiLimiter, answerRoutes);
+app.use("/comments", apiLimiter, commentRoutes);
 
 const PORT = process.env.PORT || 5000;
 
