@@ -1,0 +1,145 @@
+.user-details-container {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.user-details {
+  display: flex;
+  align-items: flex-start;
+}
+
+.user-name {
+  padding-left: 20px;
+}
+.user-name p {
+  color: #7e7e7e;
+}
+.edit-profile-btn {
+  padding: 8px 10px;
+  border: solid 1px #7e7e7e;
+  border-radius: 2px;
+  background-color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.edit-profile-btn:hover {
+  background-color: #f5f9fc;
+}
+.edit-profile-title {
+  padding: 20px 0px;
+  border-bottom: solid 1px #dbd9d9;
+}
+.edit-profile-title-2 {
+  color: grey;
+  font-weight: 400;
+}
+.edit-profile-form {
+  padding: 20px;
+  border: solid 1px #dbd9d9;
+  border-radius: 5px;
+}
+.edit-profile-form label h3 {
+  margin: 0%;
+  padding: 3px 0px;
+}
+.edit-profile-form label p {
+  margin: 0%;
+  padding: 3px 0px;
+}
+.edit-profile-form label input,
+.edit-profile-form label textarea {
+  padding: 5px;
+  margin-bottom: 20px;
+  border: solid 1px #dbd9d9;
+  width: 50%;
+}
+
+.tags-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tags-input-container input {
+  padding: 8px;
+  border: solid 1px #dbd9d9;
+  width: 50%;
+  border-radius: 4px;
+  font-size: 14px;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+
+.tags-input-container input:focus {
+  outline: none;
+  border-color: #0a95ff;
+  box-shadow: 0 0 0 3px rgba(10, 149, 255, 0.1);
+}
+
+.tags-display {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.tag-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e8f4f8;
+  color: #0a95ff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 500;
+  border: 1px solid #0a95ff;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  color: #0a95ff;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 0;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease;
+}
+
+.tag-remove:hover {
+  color: #e74c3c;
+}
+
+.user-submit-btn {
+  padding: 14px 10px;
+  background-color: #0a95ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  transition: 0.2s;
+  cursor: pointer;
+  min-width: 85px;
+}
+
+.user-submit-btn:hover {
+  background-color: #0074cc;
+}
+
+.user-cancel-btn {
+  padding: 14px 10px;
+  color: #0a95ff;
+  background-color: transparent;
+  border: 1px solid #0a95ff;
+  margin-left: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  min-width: 80px;
+}
