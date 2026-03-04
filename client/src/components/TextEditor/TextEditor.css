@@ -1,60 +1,62 @@
 .text-editor-container {
-  margin: 15px 0;
-  width: 100%;
+    margin: 15px 0;
+    width: 100%;
 }
 
 .text-editor {
-  background-color: white;
-  border: 1px solid #d0d0d0;
-  border-radius: 5px;
-  font-size: 13px;
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 5px;
+    font-size: 13px;
 }
 
 .text-editor .ql-container {
-  min-height: 200px;
-  font-family: inherit;
-  font-size: 13px;
-  border: none;
-  border-bottom: 1px solid #d0d0d0;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+    min-height: 200px;
+    max-height: 80vh;
+    overflow: auto;
+    font-family: inherit;
+    font-size: 13px;
+    border: none;
+    border-bottom: 1px solid #d0d0d0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 
 .text-editor .ql-editor {
-  padding: 12px;
-  line-height: 1.6;
-  color: #3a3a3a;
+    padding: 12px;
+    line-height: 1.6;
+    color: #3a3a3a;
 }
 
 .text-editor .ql-editor.ql-blank::before {
-  color: #999;
-  font-style: italic;
+    color: #999;
+    font-style: italic;
 }
 
 .text-editor .ql-toolbar {
-  background-color: #f5f5f5;
-  border: 1px solid #d0d0d0;
-  border-bottom: none;
-  border-top-left-radius: 5px;
-  border-top-right-radius: 5px;
-  padding: 8px;
-  display: flex;
-  align-items: center;
+    background-color: #f5f5f5;
+    border: 1px solid #d0d0d0;
+    border-bottom: none;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
 }
 
 .text-editor .ql-toolbar.ql-snow .ql-formats {
-  margin-right: 15px;
-  display: flex;
-  gap: 5px;
+    margin-right: 15px;
+    display: flex;
+    gap: 5px;
 }
 
 .text-editor .ql-toolbar.ql-snow .ql-stroke {
-  stroke: #444;
+    stroke: #444;
 }
 
 .text-editor .ql-toolbar.ql-snow .ql-fill,
 .text-editor .ql-toolbar.ql-snow .ql-stroke.ql-fill {
-  fill: #444;
+    fill: #444;
 }
 
 .text-editor .ql-toolbar.ql-snow button:hover,
@@ -63,7 +65,7 @@
 .text-editor .ql-toolbar.ql-snow .ql-picker-label:hover,
 .text-editor .ql-toolbar.ql-snow .ql-picker-item:hover,
 .text-editor .ql-toolbar.ql-snow .ql-picker-item.ql-selected {
-  color: #009dff;
+    color: #009dff;
 }
 
 .text-editor .ql-toolbar.ql-snow button:hover .ql-stroke,
@@ -72,7 +74,7 @@
 .text-editor .ql-toolbar.ql-snow .ql-picker-label:hover .ql-stroke,
 .text-editor .ql-toolbar.ql-snow .ql-picker-item:hover .ql-stroke,
 .text-editor .ql-toolbar.ql-snow .ql-picker-item.ql-selected .ql-stroke {
-  stroke: #009dff;
+    stroke: #009dff;
 }
 
 .text-editor .ql-toolbar.ql-snow button:hover .ql-fill,
@@ -81,77 +83,77 @@
 .text-editor .ql-toolbar.ql-snow .ql-picker-label:hover .ql-fill,
 .text-editor .ql-toolbar.ql-snow .ql-picker-item:hover .ql-fill,
 .text-editor .ql-toolbar.ql-snow .ql-picker-item.ql-selected .ql-fill {
-  fill: #009dff;
+    fill: #009dff;
 }
 
 .text-editor .ql-toolbar.ql-snow .ql-separator {
-  background-color: #d0d0d0;
+    background-color: #d0d0d0;
 }
 
 .text-editor .ql-snow .ql-picker-options {
-  background-color: white;
-  border: 1px solid #d0d0d0;
-  border-radius: 3px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .text-editor .ql-editor h1,
 .text-editor .ql-editor h2 {
-  margin: 10px 0 5px 0;
-  font-weight: 600;
+    margin: 10px 0 5px 0;
+    font-weight: 600;
 }
 
 .text-editor .ql-editor h1 {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .text-editor .ql-editor h2 {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .text-editor .ql-editor blockquote {
-  border-left: 4px solid #d0d0d0;
-  padding-left: 15px;
-  margin: 10px 0;
-  color: #666;
+    border-left: 4px solid #d0d0d0;
+    padding-left: 15px;
+    margin: 10px 0;
+    color: #666;
 }
 
 .text-editor .ql-editor code {
-  background-color: #f4f4f4;
-  border-radius: 3px;
-  padding: 2px 4px;
-  font-family: "Monaco", "Menlo", "Courier New", monospace;
-  font-size: 12px;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+    padding: 2px 4px;
+    font-family: 'Monaco', 'Menlo', 'Courier New', monospace;
+    font-size: 12px;
 }
 
 .text-editor .ql-editor pre {
-  background-color: #f4f4f4;
-  border-radius: 3px;
-  padding: 10px;
-  overflow-x: auto;
+    background-color: #f4f4f4;
+    border-radius: 3px;
+    padding: 10px;
+    overflow-x: auto;
 }
 
 .text-editor .ql-editor ol,
 .text-editor .ql-editor ul {
-  margin: 10px 0;
-  padding-left: 25px;
+    margin: 10px 0;
+    padding-left: 25px;
 }
 
 .text-editor .ql-editor li {
-  margin-bottom: 5px;
+    margin-bottom: 5px;
 }
 
 @media screen and (max-width: 768px) {
-  .text-editor .ql-toolbar {
-    flex-wrap: wrap;
-    padding: 5px;
-  }
+    .text-editor .ql-toolbar {
+        flex-wrap: wrap;
+        padding: 5px;
+    }
 
-  .text-editor .ql-toolbar.ql-snow .ql-formats {
-    margin-right: 5px;
-  }
+    .text-editor .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 5px;
+    }
 
-  .text-editor .ql-container {
-    min-height: 150px;
-  }
+    .text-editor .ql-container {
+        min-height: 150px;
+    }
 }
