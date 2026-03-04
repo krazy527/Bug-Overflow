@@ -91,18 +91,18 @@ export const incrementView = (questionId) => async (dispatch) => {
   }
 };
 
-export const addQuestionComment = (questionId, commentBody) => async (dispatch) => {
+export const addQuestionComment = (questionId, commentBody, userCommented) => async (dispatch) => {
   try {
-    await api.addQuestionComment(questionId, commentBody);
+    await api.addQuestionComment(questionId, commentBody, userCommented);
     dispatch(fetchAllQuestions());
   } catch (error) {
     console.log(error);
   }
 };
 
-export const addAnswerComment = (questionId, answerId, commentBody) => async (dispatch) => {
+export const addAnswerComment = (questionId, answerId, commentBody, userCommented) => async (dispatch) => {
   try {
-    await api.addAnswerComment(questionId, answerId, commentBody);
+    await api.addAnswerComment(questionId, answerId, commentBody, userCommented);
     dispatch(fetchAllQuestions());
   } catch (error) {
     console.log(error);

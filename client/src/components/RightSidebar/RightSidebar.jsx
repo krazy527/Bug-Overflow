@@ -1,12 +1,12 @@
 import React from "react";
 import "./RightSidebar.css";
-import Widget from "./Widget";
 import WidgetTags from "./WidgetTags";
+import PopularQuestions from "./PopularQuestions";
 
 const RightSidebar = () => {
   return (
     <aside className="right-sidebar">
-      <Widget />
+      <PopularQuestions />
       <WidgetTags />
     </aside>
   );

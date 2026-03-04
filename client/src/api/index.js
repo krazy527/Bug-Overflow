@@ -49,10 +49,10 @@ export const voteAnswer = (questionId, answerId, value) =>
 export const incrementView = (id) => API.patch(`/views/${id}`);
 
 // Comments
-export const addQuestionComment = (questionId, commentBody) =>
-  API.post(`/comments/question/${questionId}`, { commentBody });
-export const addAnswerComment = (questionId, answerId, commentBody) =>
-  API.post(`/comments/answer/${questionId}`, { answerId, commentBody });
+export const addQuestionComment = (questionId, commentBody, userCommented) =>
+  API.post(`/comments/question/${questionId}`, { commentBody, userCommented });
+export const addAnswerComment = (questionId, answerId, commentBody, userCommented) =>
+  API.post(`/comments/answer/${questionId}`, { answerId, commentBody, userCommented });
 export const deleteQuestionComment = (questionId, commentId) =>
   API.delete(`/comments/question/${questionId}/${commentId}`);
 export const deleteAnswerComment = (questionId, answerId, commentId) =>
