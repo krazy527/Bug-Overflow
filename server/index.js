@@ -5,6 +5,10 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/users.js";
 import questionRoutes from "./routes/Questions.js";
 import answerRoutes from "./routes/Answers.js";
+import commentRoutes from "./routes/Comments.js";
+import bookmarkRoutes from "./routes/Bookmarks.js";
+import notificationRoutes from "./routes/Notifications.js";
+import viewRoutes from "./routes/Views.js";
 import connectDB from "./connectMongoDb.js";
 
 dotenv.config();
@@ -21,6 +25,10 @@ app.use(cors());
 app.use("/user", userRoutes);
 app.use("/questions", questionRoutes);
 app.use("/answer", answerRoutes);
+app.use("/comments", commentRoutes);
+app.use("/bookmarks", bookmarkRoutes);
+app.use("/notifications", notificationRoutes);
+app.use("/views", viewRoutes);
 
 const PORT = process.env.PORT || 5000;
 
