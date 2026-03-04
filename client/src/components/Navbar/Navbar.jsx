@@ -11,6 +11,8 @@ import { setCurrentUser } from "../../actions/currentUser";
 import bars from "../../assets/bars-solid.svg";
 import { fetchNotifications, markAllNotificationsRead } from "../../actions/notifications";
 
+const NOTIFICATION_POLL_INTERVAL = 30000;
+
 const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
   const dispatch = useDispatch();
   var User = useSelector((state) => state.currentUserReducer);
@@ -41,7 +43,7 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
       dispatch(fetchNotifications());
       const interval = setInterval(() => {
         dispatch(fetchNotifications());
-      }, 30000);
+      }, NOTIFICATION_POLL_INTERVAL);
       return () => clearInterval(interval);
     }
   }, [User?.token, dispatch]);
