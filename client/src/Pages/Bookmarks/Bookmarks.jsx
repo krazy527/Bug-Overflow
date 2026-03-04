@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import LeftSidebar from "../../components/LeftSidebar/LeftSidebar";
@@ -8,7 +8,6 @@ import "./Bookmarks.css";
 
 const Bookmarks = ({ slideIn, handleSlideIn }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const currentUser = useSelector((state) => state.currentUserReducer);
   const bookmarks = useSelector((state) => state.bookmarksReducer);
 

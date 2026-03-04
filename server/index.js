@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+import rateLimit from "express-rate-limit";
 
 import userRoutes from "./routes/users.js";
 import questionRoutes from "./routes/Questions.js";
@@ -18,11 +19,30 @@ app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 
+// Global rate limiter: max 200 requests per 15 minutes per IP
+const globalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many requests, please try again later." },
+});
+app.use(globalLimiter);
+
+// Stricter limiter for auth endpoints
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: "Too many authentication attempts, please try again later." },
+});
+
 // app.use("/", (req, res) => {
 //   res.send("This is a bugoverflow clone API");
 // });
 
-app.use("/user", userRoutes);
+app.use("/user", authLimiter, userRoutes);
 app.use("/questions", questionRoutes);
 app.use("/answer", answerRoutes);
 app.use("/comments", commentRoutes);

@@ -128,7 +128,7 @@ export const voteAnswer = async (req, res) => {
     if (value === "upVote") {
       if (downIndex !== -1) {
         answer.downVote = answer.downVote.filter((id) => id !== String(userId));
-        repDelta += 2; // restore the -2 downvote penalty
+        repDelta += 2; // remove the -2 downvote penalty (un-downvoting)
       }
       if (upIndex === -1) {
         answer.upVote.push(userId);
@@ -147,7 +147,7 @@ export const voteAnswer = async (req, res) => {
         repDelta -= 2;
       } else {
         answer.downVote = answer.downVote.filter((id) => id !== String(userId));
-        repDelta += 2; // restore the -2 downvote penalty
+        repDelta += 2; // remove the -2 downvote penalty (un-downvoting)
       }
     }
 
