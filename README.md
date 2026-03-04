@@ -1,19 +1,19 @@
 
 
-<h1 align="center"> Stack Overflow Clone 🚀</h1> 
+<h1 align="center"> Bug Overflow 🚀</h1> 
 <p align="center">
-  <a href="https://stack-overflow-clone-y1fv.onrender.com/">
-    <img alt="Stack Overflow Clone image" title="Stack Overflow Clone" src="https://i.ibb.co/TKHkYnP/Whats-App-Image-2023-08-24-at-9-23-39-PM.jpg" width="450">
+  <a href="https://bug-overflow-y1fv.onrender.com/">
+    <img alt="Bug Overflow image" title="Bug Overflow" src="/client/public/bugOverflow.png" width="450">
     
   </a>
 </p>
 
 <p align="center">
-Welcome to **Stack-Overflow-Clone**, a platform dedicated to fostering a vibrant community of developers helping developers by providing a space to ask questions, share knowledge, and find solutions together. 🌟❤
+Welcome to **Bug-Overflow**, a platform dedicated to fostering a vibrant community of developers helping developers by providing a space to ask questions, share knowledge, and find solutions together. 🌟❤
 </p>
 
 <p align="center">
-  <a href="https://stack-overflow-clone-y1fv.onrender.com/">Stack Overflow Clone
+  <a href="https://bug-overflow-y1fv.onrender.com/">Bug Overflow
   </a>
 </p>
 
@@ -33,9 +33,9 @@ Welcome to **Stack-Overflow-Clone**, a platform dedicated to fostering a vibrant
 
 ### Important links related to the project
 
-* <b>Deployed website 👉: </b> [Stack-Overflow-Clone](https://stack-overflow-clone-y1fv.onrender.com/)
+* <b>Deployed website 👉: </b> [Bug-Overflow](https://bug-overflow-y1fv.onrender.com/)
 
-* <b>The backend is hosted here 👉: </b> [Stack-Overflow-Clone-Backend](https://stack-overflow-clone-server-ql8j.onrender.com/)
+* <b>The backend is hosted here 👉: </b> [Bug-Overflow-Backend](https://bug-overflow-server-ql8j.onrender.com/)
 
 
 ## Technology Used
@@ -53,7 +53,7 @@ Welcome to **Stack-Overflow-Clone**, a platform dedicated to fostering a vibrant
  
 ## Features
 
-Features of our Stack Overflow Clone are as follows:
+Features of our Bug Overflow are as follows:
 
 - **Ask & Answer:** Post your coding questions and provide answers to help fellow developers.
 - **Voting:** Upvote helpful questions and answers to recognize and encourage valuable contributions.
@@ -165,10 +165,10 @@ Features of our Stack Overflow Clone are as follows:
 
 To setup the project on your local environment, follow the given steps:
 
-1. Fork the [Palaksharma23/Stack-Overflow-Clone](https://github.com/krazy527/Stack-Overflow-Clone) repository.
+1. Fork the [krazy527/Bug-Overflow](https://github.com/krazy527/Bug-Overflow) repository.
 2. Clone the repository:
 ```
-https://github.com/<USERNAME>/Stack-Overflow-Clone.git
+https://github.com/<USERNAME>/Bug-Overflow.git
 ```
 
   Replace the `<USERNAME>` with your GitHub username. 
@@ -227,10 +227,10 @@ Server will start at `PORT 5000`
 
 ## Contributions
 
-Your worthy contributions are most welcome to our Stack Overflow Clone website. If you have an idea for a new feature or a bug fix, please submit an issue or pull request.
+Your worthy contributions are most welcome to our Bug Overflow website. If you have an idea for a new feature or a bug fix, please submit an issue or pull request.
 
 
 ## Feedback
 
-Feel free to send any feedback on [Twitter](https://twitter.com/krazy527) or [file an issue](https://github.com/krazy527/Stack-Overflow-Clone/issues/new). 
+Feel free to send any feedback on [Twitter](https://twitter.com/krazy527) or [file an issue](https://github.com/krazy527/Bug-Overflow/issues/new). 
 
