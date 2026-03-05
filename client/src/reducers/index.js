@@ -5,6 +5,7 @@ import questionsReducer from "./questions";
 import usersReducer from "./users";
 import notificationsReducer from "./notifications";
 import bookmarksReducer from "./bookmarks";
+import articlesReducer from "./articles";
 
 export default combineReducers({
   authReducer,
@@ -13,4 +14,5 @@ export default combineReducers({
   usersReducer,
   notificationsReducer,
   bookmarksReducer,
+  articlesReducer,
 });

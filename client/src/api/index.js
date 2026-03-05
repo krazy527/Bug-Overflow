@@ -16,6 +16,11 @@ API.interceptors.request.use((req) => {
 
 export const logIn = (authData) => API.post("/user/login", authData);
 export const signUp = (authData) => API.post("/user/signup", authData);
+export const verifySignupOtp = (payload) => API.post("/user/verify-signup-otp", payload);
+export const resendSignupOtp = (payload) => API.post("/user/resend-signup-otp", payload);
+export const forgotPassword = (payload) => API.post("/user/forgot-password", payload);
+export const verifyResetOtp = (payload) => API.post("/user/verify-reset-otp", payload);
+export const resetPassword = (payload) => API.post("/user/reset-password", payload);
 
 export const postQuestion = (questionData) =>
   API.post("/questions/Ask", questionData);
@@ -23,6 +28,13 @@ export const getAllQuestions = () => API.get("/questions/get");
 export const deleteQuestion = (id) => API.delete(`/questions/delete/${id}`);
 export const voteQuestion = (id, value) =>
   API.patch(`/questions/vote/${id}`, { value });
+
+// Articles
+export const getAllArticles = () => API.get("/articles/get");
+export const getArticleById = (id) => API.get(`/articles/${id}`);
+export const createArticle = (articleData) => API.post("/articles/create", articleData);
+export const updateArticle = (id, articleData) => API.patch(`/articles/update/${id}`, articleData);
+export const deleteArticle = (id) => API.delete(`/articles/delete/${id}`);
 
 export const postAnswer = (id, noOfAnswers, answerBody, userAnswered) =>
   API.patch(`/answer/post/${id}`, { noOfAnswers, answerBody, userAnswered });
@@ -62,6 +74,8 @@ export const deleteAnswerComment = (questionId, answerId, commentId) =>
 export const getBookmarks = () => API.get('/bookmarks/');
 export const addBookmark = (questionId) => API.post('/bookmarks/add', { questionId });
 export const removeBookmark = (questionId) => API.delete('/bookmarks/remove', { data: { questionId } });
+export const addArticleBookmark = (articleId) => API.post('/bookmarks/add-article', { articleId });
+export const removeArticleBookmark = (articleId) => API.delete('/bookmarks/remove-article', { data: { articleId } });
 
 // Notifications
 export const getNotifications = () => API.get('/notifications/');

@@ -21,3 +21,16 @@ export const toggleBookmark = (questionId, isBookmarked) => async (dispatch) => 
     console.log(error);
   }
 };
+
+export const toggleArticleBookmark = (articleId, isBookmarked) => async (dispatch) => {
+  try {
+    if (isBookmarked) {
+      await api.removeArticleBookmark(articleId);
+    } else {
+      await api.addArticleBookmark(articleId);
+    }
+    dispatch(fetchBookmarks());
+  } catch (error) {
+    console.log(error);
+  }
+};

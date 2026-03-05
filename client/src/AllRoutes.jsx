@@ -12,6 +12,10 @@ import UserProfile from "./Pages/UserProfile/UserProfile";
 import SearchPage from "./Pages/Search/Search";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Bookmarks from "./Pages/Bookmarks/Bookmarks";
+import Articles from "./Pages/Articles/Articles";
+import ArticleDetails from "./Pages/Articles/ArticleDetails";
+import ArticleEditor from "./Pages/Articles/ArticleEditor";
+import About from "./Pages/About/About";
 
 const AllRoutes = ({ slideIn, handleSlideIn }) => {
   return (
@@ -54,6 +58,26 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
       <Route
         path="/Bookmarks"
         element={<Bookmarks slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      />
+      <Route
+        path="/Articles"
+        element={<Articles slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      />
+      <Route
+        path="/Articles/new"
+        element={<ArticleEditor slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      />
+      <Route
+        path="/Articles/edit/:id"
+        element={<ArticleEditor slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      />
+      <Route
+        path="/Articles/:id"
+        element={<ArticleDetails slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      />
+      <Route
+        path="/About"
+        element={<About slideIn={slideIn} handleSlideIn={handleSlideIn} />}
       />
     </Routes>
   );

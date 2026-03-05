@@ -11,7 +11,10 @@ export const getAllUsers = async (req, res) => {
         name: user.name,
         about: user.about,
         tags: user.tags,
+        location: user.location,
+        links: user.links,
         joinedOn: user.joinedOn,
+        lastSeen: user.lastSeen,
         reputation: user.reputation,
         badges: user.badges,
       });
@@ -112,16 +115,32 @@ export const searchTags = async (req, res) => {
 
 export const updateProfile = async (req, res) => {
   const { id: _id } = req.params;
-  const { name, about, tags } = req.body;
+  const { name, about, tags, location, links } = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(_id)) {
     return res.status(404).send("question unavailable...");
   }
 
+  if (String(req.userId) !== String(_id)) {
+    return res.status(403).json({ message: "Unauthorized to update this profile" });
+  }
+
   try {
     const updatedProfile = await users.findByIdAndUpdate(
       _id,
-      { $set: { name: name, about: about, tags: tags } },
+      {
+        $set: {
+          name: name,
+          about: about,
+          tags: tags,
+          location: location || "",
+          links: {
+            website: links?.website || "",
+            x: links?.x || "",
+            github: links?.github || "",
+          },
+        },
+      },
       { new: true }
     );
     res.status(200).json(updatedProfile);

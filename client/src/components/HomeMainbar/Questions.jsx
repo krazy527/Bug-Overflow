@@ -5,13 +5,19 @@ import moment from "moment";
 const Questions = ({ question }) => {
   return (
     <div className="display-question-container">
-      <div className="display-votes-ans">
-        <p>{question.upVote.length - question.downVote.length}</p>
-        <p>votes</p>
-      </div>
-      <div className="display-votes-ans">
-        <p>{question.noOfAnswers}</p>
-        <p>answers</p>
+      <div className="display-stats-column">
+        <div className="display-votes-ans">
+          <p className="stats-value">{question.upVote.length - question.downVote.length}</p>
+          <p className="stats-label">votes</p>
+        </div>
+        <div className={`display-votes-ans ${question.noOfAnswers > 0 ? "has-answers" : ""}`}>
+          <p className="stats-value">{question.noOfAnswers}</p>
+          <p className="stats-label">answers</p>
+        </div>
+        <div className="display-votes-ans">
+          <p className="stats-value">{question.views || 0}</p>
+          <p className="stats-label">views</p>
+        </div>
       </div>
       <div className="display-question-details">
         <Link to={`/Questions/${question._id}`} className="question-title-link">
