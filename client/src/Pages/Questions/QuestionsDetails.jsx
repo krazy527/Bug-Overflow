@@ -3,9 +3,9 @@ import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import copy from "copy-to-clipboard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown, faBookmark } from "@fortawesome/free-solid-svg-icons";
 
-import upvote from "../../assets/sort-up.svg";
-import downvote from "../../assets/sort-down.svg";
 import "./Questions.css";
 import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
@@ -19,6 +19,7 @@ import {
   deleteQuestionComment,
 } from "../../actions/question";
 import { toggleBookmark, fetchBookmarks } from "../../actions/bookmarks";
+import { showToast } from "../../utils/toast";
 
 const QuestionsDetails = () => {
   const { id } = useParams();
@@ -51,12 +52,12 @@ const QuestionsDetails = () => {
   const handlePostAns = (e, answerLength) => {
     e.preventDefault();
     if (User === null) {
-      alert("Login or Signup to answer a question");
+      showToast("Login or signup to answer a question");
       Navigate("/Auth");
     } else {
       const plainTextAnswer = Answer.replace(/<[^>]*>/g, "");
       if (plainTextAnswer.trim() === "") {
-        alert("Enter an answer before submitting");
+        showToast("Enter an answer before submitting");
       } else {
         dispatch(
           postAnswer({
@@ -73,26 +74,30 @@ const QuestionsDetails = () => {
 
   const handleShare = () => {
     copy(url + location.pathname);
-    alert("Copied url : " + url + location.pathname);
+    showToast("Copied url", "success");
   };
 
   const handleDelete = () => {
     dispatch(deleteQuestion(id, Navigate));
   };
 
-  const handleUpVote = () => {
+  const handleUpVote = (question) => {
     if (User === null) {
-      alert("Login or Signup to up vote a question");
+      showToast("Login or signup to up vote a question");
       Navigate("/Auth");
+    } else if (String(User?.result?._id) === String(question?.userId)) {
+      showToast("You can't upvote your own question.");
     } else {
       dispatch(voteQuestion(id, "upVote"));
     }
   };
 
-  const handleDownVote = () => {
+  const handleDownVote = (question) => {
     if (User === null) {
-      alert("Login or Signup to down vote a question");
+      showToast("Login or signup to down vote a question");
       Navigate("/Auth");
+    } else if (String(User?.result?._id) === String(question?.userId)) {
+      showToast("You can't downvote your own question.");
     } else {
       dispatch(voteQuestion(id, "downVote"));
     }
@@ -101,7 +106,7 @@ const QuestionsDetails = () => {
   const handleAddQuestionComment = (e, question) => {
     e.preventDefault();
     if (!User) {
-      alert("Login to comment");
+      showToast("Login to comment");
       return;
     }
     if (questionCommentText.trim()) {
@@ -117,7 +122,7 @@ const QuestionsDetails = () => {
 
   const handleBookmark = (question) => {
     if (!User) {
-      alert("Login to bookmark questions");
+      showToast("Login to bookmark questions");
       return;
     }
     const isBookmarked = bookmarks.data.some((q) => q._id === question._id);
@@ -153,21 +158,35 @@ const QuestionsDetails = () => {
                     </h1>
                     <div className="question-details-container-2">
                       <div className="question-votes">
-                        <img
-                          src={upvote}
-                          alt=""
-                          width="18"
-                          className="votes-icon"
-                          onClick={handleUpVote}
+                        <FontAwesomeIcon
+                          icon={faCaretUp}
+                          className={`votes-icon ${
+                            (question.upVote || []).includes(String(User?.result?._id))
+                              ? "active"
+                              : ""
+                          }`}
+                          onClick={() => handleUpVote(question)}
+                          title="Upvote"
                         />
                         <p>{question.upVote.length - question.downVote.length}</p>
-                        <img
-                          src={downvote}
-                          alt=""
-                          width="18"
-                          className="votes-icon"
-                          onClick={handleDownVote}
+                        <FontAwesomeIcon
+                          icon={faCaretDown}
+                          className={`votes-icon ${
+                            (question.downVote || []).includes(String(User?.result?._id))
+                              ? "active"
+                              : ""
+                          }`}
+                          onClick={() => handleDownVote(question)}
+                          title="Downvote"
                         />
+                        <button
+                          type="button"
+                          className={`bookmark-icon-btn ${isBookmarked ? "active" : ""}`}
+                          onClick={() => handleBookmark(question)}
+                          title={isBookmarked ? "Remove bookmark" : "Bookmark"}
+                        >
+                          <FontAwesomeIcon icon={faBookmark} />
+                        </button>
                       </div>
                       <div style={{ width: "100%" }}>
                         <div
@@ -190,13 +209,6 @@ const QuestionsDetails = () => {
                           <div>
                             <button type="button" onClick={handleShare}>
                               Share
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => handleBookmark(question)}
-                              title={isBookmarked ? "Remove bookmark" : "Bookmark"}
-                            >
-                              {isBookmarked ? "🔖 Bookmarked" : "🔖 Bookmark"}
                             </button>
                             {User?.result?._id === question?.userId && (
                               <button type="button" onClick={handleDelete}>

@@ -2,6 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import decode from "jwt-decode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMoon,
+  faSun,
+  faBell,
+  faRightToBracket,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
 
 import logo from "../../assets/bugOverflow.png";
 import Avatar from "../../components/Avatar/Avatar";
@@ -59,7 +67,7 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
     <nav className="main-nav">
       <div className="navbar">
         {User?.token && <button className="slide-in-icon" onClick={() => handleSlideIn()}>
-          <img src={bars} alt="bars" width="15" />
+          <img src={bars} alt="bars" style={{borderRadius: 5}} width="15" />
         </button>}
         <div className="navbar-1">
           <Link to="/" className="nav-item nav-logo">
@@ -67,12 +75,6 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
           </Link>
           <Link to="/" className="nav-item nav-btn res-nav">
             About
-          </Link>
-          <Link to="/" className="nav-item nav-btn res-nav">
-            Products
-          </Link>
-          <Link to="/" className="nav-item nav-btn res-nav">
-            For Teams
           </Link>
           <SearchBar />
         </div>
@@ -82,11 +84,12 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
             onClick={() => setDarkMode && setDarkMode(!darkMode)}
             title={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           >
-            {darkMode ? "☀️" : "🌙"}
+            <FontAwesomeIcon icon={darkMode ? faSun : faMoon} />
           </button>
           {User === null ? (
-            <Link to="/Auth" className="nav-item nav-links">
-              Log in
+            <Link to="/Auth" className="nav-item nav-links nav-icon-link" title="Log in">
+              <FontAwesomeIcon icon={faRightToBracket} className="nav-action-icon" />
+              <span>Log in</span>
             </Link>
           ) : (
             <>
@@ -96,7 +99,7 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
                   onClick={handleNotificationClick}
                   title="Notifications"
                 >
-                  🔔
+                  <FontAwesomeIcon icon={faBell} />
                   {notifications.unreadCount > 0 && (
                     <span className="notification-badge">
                       {notifications.unreadCount > 9 ? "9+" : notifications.unreadCount}
@@ -129,22 +132,23 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
                   </div>
                 )}
               </div>
-              <Avatar
-                backgroundColor="#009dff"
-                px="10px"
-                py="7px"
-                borderRadius="50%"
-                color="white"
+              <Link
+                to={`/Users/${User?.result?._id}`}
+                style={{ color: "white", textDecoration: "none", padding: "10px" }}
               >
-                <Link
-                  to={`/Users/${User?.result?._id}`}
-                  style={{ color: "white", textDecoration: "none" }}
+                <Avatar
+                  backgroundColor="#009dff"
+                  px="12px"
+                  py="7px"
+                  borderRadius="50%"
+                  color="white"
                 >
-                  {User.result.name.charAt(0).toUpperCase()}
-                </Link>
-              </Avatar>
+                    {User.result.name.charAt(0).toUpperCase()}
+                </Avatar>
+              </Link>
               <button className="nav-item nav-links" style={{marginLeft: 10}} onClick={handleLogout}>
-                Log out
+                <FontAwesomeIcon icon={faRightFromBracket} className="nav-action-icon" />
+                <span>Log out</span>
               </button>
             </>
           )}

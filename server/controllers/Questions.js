@@ -86,6 +86,19 @@ export const voteQuestion = async (req, res) => {
 
   try {
     const question = await Questions.findById(_id);
+    if (!question) {
+      return res.status(404).json({ message: "question not found" });
+    }
+
+    if (String(question.userId) === String(userId)) {
+      return res
+        .status(403)
+        .json({ message: "You cannot vote on your own question" });
+    }
+
+    question.upVote = Array.isArray(question.upVote) ? question.upVote : [];
+    question.downVote = Array.isArray(question.downVote) ? question.downVote : [];
+
     const upIndex = question.upVote.findIndex((id) => id === String(userId));
     const downIndex = question.downVote.findIndex(
       (id) => id === String(userId)

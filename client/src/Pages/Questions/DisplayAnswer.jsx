@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import moment from "moment";
 import { Link, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 import Avatar from "../../components/Avatar/Avatar";
 import { deleteAnswer, voteAnswer, acceptAnswer, addAnswerComment, deleteAnswerComment } from "../../actions/question";
-import upvoteIcon from "../../assets/sort-up.svg";
-import downvoteIcon from "../../assets/sort-down.svg";
+import { showToast } from "../../utils/toast";
 
 const DisplayAnswer = ({ question, handleShare }) => {
   const User = useSelector((state) => state.currentUserReducer);
@@ -21,7 +22,7 @@ const DisplayAnswer = ({ question, handleShare }) => {
 
   const handleUpVote = (answerId) => {
     if (!User) {
-      alert("Login or Signup to vote");
+      showToast("Login or signup to vote");
       return;
     }
     dispatch(voteAnswer(id, answerId, "upVote"));
@@ -29,7 +30,7 @@ const DisplayAnswer = ({ question, handleShare }) => {
 
   const handleDownVote = (answerId) => {
     if (!User) {
-      alert("Login or Signup to vote");
+      showToast("Login or signup to vote");
       return;
     }
     dispatch(voteAnswer(id, answerId, "downVote"));
@@ -42,7 +43,7 @@ const DisplayAnswer = ({ question, handleShare }) => {
   const handleAddComment = (e, answerId) => {
     e.preventDefault();
     if (!User) {
-      alert("Login to comment");
+      showToast("Login to comment");
       return;
     }
     const text = commentText[answerId] || "";
@@ -75,23 +76,30 @@ const DisplayAnswer = ({ question, handleShare }) => {
           <div
             className={`display-ans ${isAccepted ? "accepted-answer" : ""}`}
             key={ans._id}
+            id={`answer-${ans._id}`}
           >
             <div className="answer-content-wrapper">
               <div className="answer-vote-column">
-                <img
-                  src={upvoteIcon}
-                  alt="upvote"
-                  width="18"
-                  className="votes-icon"
+                <FontAwesomeIcon
+                  icon={faCaretUp}
+                  className={`votes-icon ${
+                    (ans.upVote || []).includes(String(User?.result?._id))
+                      ? "vote-up-active"
+                      : ""
+                  }`}
                   onClick={() => handleUpVote(ans._id)}
+                  title="Upvote"
                 />
                 <p className="vote-count">{voteScore}</p>
-                <img
-                  src={downvoteIcon}
-                  alt="downvote"
-                  width="18"
-                  className="votes-icon"
+                <FontAwesomeIcon
+                  icon={faCaretDown}
+                  className={`votes-icon ${
+                    (ans.downVote || []).includes(String(User?.result?._id))
+                      ? "vote-down-active"
+                      : ""
+                  }`}
                   onClick={() => handleDownVote(ans._id)}
+                  title="Downvote"
                 />
                 {isAccepted && (
                   <div className="accepted-checkmark" title="Accepted answer">✓</div>

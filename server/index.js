@@ -10,6 +10,7 @@ import commentRoutes from "./routes/Comments.js";
 import bookmarkRoutes from "./routes/Bookmarks.js";
 import notificationRoutes from "./routes/Notifications.js";
 import viewRoutes from "./routes/Views.js";
+import articleRoutes from "./routes/Articles.js";
 import connectDB from "./connectMongoDb.js";
 
 dotenv.config();
@@ -49,6 +50,7 @@ app.use("/comments", commentRoutes);
 app.use("/bookmarks", bookmarkRoutes);
 app.use("/notifications", notificationRoutes);
 app.use("/views", viewRoutes);
+app.use("/articles", articleRoutes);
 
 const PORT = process.env.PORT || 5000;
 

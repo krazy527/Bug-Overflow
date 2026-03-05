@@ -12,6 +12,8 @@
 
 .text-editor .ql-container {
   min-height: 200px;
+  max-height: 80vh;
+  overflow: auto;
   font-family: inherit;
   font-size: 13px;
   border: none;

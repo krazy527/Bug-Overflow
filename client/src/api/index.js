@@ -24,6 +24,13 @@ export const deleteQuestion = (id) => API.delete(`/questions/delete/${id}`);
 export const voteQuestion = (id, value) =>
   API.patch(`/questions/vote/${id}`, { value });
 
+// Articles
+export const getAllArticles = () => API.get("/articles/get");
+export const getArticleById = (id) => API.get(`/articles/${id}`);
+export const createArticle = (articleData) => API.post("/articles/create", articleData);
+export const updateArticle = (id, articleData) => API.patch(`/articles/update/${id}`, articleData);
+export const deleteArticle = (id) => API.delete(`/articles/delete/${id}`);
+
 export const postAnswer = (id, noOfAnswers, answerBody, userAnswered) =>
   API.patch(`/answer/post/${id}`, { noOfAnswers, answerBody, userAnswered });
 export const deleteAnswer = (id, answerId, noOfAnswers) =>
@@ -62,6 +69,8 @@ export const deleteAnswerComment = (questionId, answerId, commentId) =>
 export const getBookmarks = () => API.get('/bookmarks/');
 export const addBookmark = (questionId) => API.post('/bookmarks/add', { questionId });
 export const removeBookmark = (questionId) => API.delete('/bookmarks/remove', { data: { questionId } });
+export const addArticleBookmark = (articleId) => API.post('/bookmarks/add-article', { articleId });
+export const removeArticleBookmark = (articleId) => API.delete('/bookmarks/remove-article', { data: { articleId } });
 
 // Notifications
 export const getNotifications = () => API.get('/notifications/');

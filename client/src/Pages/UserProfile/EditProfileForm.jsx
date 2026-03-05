@@ -1,11 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateProfile } from "../../actions/users";
+import { showToast } from "../../utils/toast";
 
-const EditProfileForm = ({ currentUser, setSwitch }) => {
-  const [name, setName] = useState(currentUser?.result?.name);
-  const [about, setAbout] = useState(currentUser?.result?.about);
-  const [tags, setTags] = useState(currentUser?.result?.tags || []);
+const COUNTRY_OPTIONS = ["India", "USA", "China", "Canada", "UK", "Germany", "France", "Japan", "Australia", "Brazil"];
+
+const EditProfileForm = ({ currentUser, currentProfile, setSwitch }) => {
+  const [name, setName] = useState(currentProfile?.name || currentUser?.result?.name || "");
+  const [about, setAbout] = useState(currentProfile?.about || currentUser?.result?.about || "");
+  const [tags, setTags] = useState(currentProfile?.tags || currentUser?.result?.tags || []);
+  const [location, setLocation] = useState(currentProfile?.location || currentUser?.result?.location || "India");
+  const [website, setWebsite] = useState(currentProfile?.links?.website || currentUser?.result?.links?.website || "");
+  const [xLink, setXLink] = useState(currentProfile?.links?.x || currentUser?.result?.links?.x || "");
+  const [github, setGithub] = useState(currentProfile?.links?.github || currentUser?.result?.links?.github || "");
   const dispatch = useDispatch();
 
   const handleTagsKeyDown = (e) => {
@@ -22,9 +29,21 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (tags.length === 0) {
-      alert("Update tags field");
+      showToast("Update tags field");
     } else {
-      dispatch(updateProfile(currentUser?.result?._id, { name, about, tags }));
+      dispatch(
+        updateProfile(currentUser?.result?._id, {
+          name,
+          about,
+          tags,
+          location,
+          links: {
+            website,
+            x: xLink,
+            github,
+          },
+        })
+      );
     }
     setSwitch(false);
   };
@@ -52,6 +71,60 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
             onChange={(e) => setAbout(e.target.value)}
           ></textarea>
         </label>
+        <label htmlFor="location">
+          <h3>Location</h3>
+          <select
+            id="location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="profile-select"
+          >
+            {COUNTRY_OPTIONS.map((country) => (
+              <option key={country} value={country}>
+                {country}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <div className="links-section">
+          <h3>Links</h3>
+          <div className="links-grid">
+            <label htmlFor="website-link">
+              <p>Website link</p>
+              <input
+                type="text"
+                id="website-link"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                placeholder="https://yourwebsite.com"
+              />
+            </label>
+
+            <label htmlFor="x-link">
+              <p>X link or username</p>
+              <input
+                type="text"
+                id="x-link"
+                value={xLink}
+                onChange={(e) => setXLink(e.target.value)}
+                placeholder="@username or https://x.com/username"
+              />
+            </label>
+
+            <label htmlFor="github-link">
+              <p>GitHub link or username</p>
+              <input
+                type="text"
+                id="github-link"
+                value={github}
+                onChange={(e) => setGithub(e.target.value)}
+                placeholder="username or https://github.com/username"
+              />
+            </label>
+          </div>
+        </div>
+
         <label htmlFor="tags">
           <h3>Watched tags</h3>
           <p>Add tags (press Space, Tab, or Enter to add)</p>

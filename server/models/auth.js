@@ -6,7 +6,14 @@ const userSchema = mongoose.Schema({
   password: { type: String, required: true },
   about: { type: String },
   tags: { type: [String] },
+  location: { type: String, default: "" },
+  links: {
+    website: { type: String, default: "" },
+    x: { type: String, default: "" },
+    github: { type: String, default: "" },
+  },
   joinedOn: { type: Date, default: Date.now },
+  lastSeen: { type: Date, default: Date.now },
   reputation: { type: Number, default: 1 },
   badges: {
     bronze: { type: [String], default: [] },
@@ -14,6 +21,7 @@ const userSchema = mongoose.Schema({
     gold: { type: [String], default: [] },
   },
   bookmarks: { type: [String], default: [] },
+  articleBookmarks: { type: [String], default: [] },
   notifications: [
     {
       message: { type: String, required: true },

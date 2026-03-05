@@ -47,6 +47,7 @@
 .navbar .navbar-2 {
   display: flex;
   align-items: center;
+  gap: 6px;
 }
 
 .nav-logo {
@@ -99,6 +100,9 @@
   border-radius: 3px;
   background-color: #e7f8fe;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nav-links:hover {
@@ -129,9 +133,10 @@
 
 .dark-mode-toggle {
   background: none;
+  border: 1px solid transparent;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 17px;
   padding: 4px 8px;
   border-radius: 4px;
   margin-right: 8px;
@@ -151,10 +156,18 @@
   background: none;
   border: none;
   cursor: pointer;
-  font-size: 18px;
+  font-size: 17px;
   padding: 4px 8px;
   position: relative;
   border-radius: 4px;
+}
+
+.nav-action-icon {
+  font-size: 13px;
+}
+
+.nav-icon-link {
+  text-decoration: none;
 }
 
 .notification-btn:hover {

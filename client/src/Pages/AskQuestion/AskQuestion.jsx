@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "./AskQuestion.css";
 import { askQuestion } from "../../actions/question";
 import TextEditor from "../../components/TextEditor/TextEditor";
+import { showToast } from "../../utils/toast";
 
 const AskQuestion = () => {
   const [questionTitle, setQuestionTitle] = useState("");
@@ -49,8 +50,8 @@ const AskQuestion = () => {
             navigate
           )
         );
-      } else alert("Please enter all the fields");
-    } else alert("Login to ask question");
+      } else showToast("Please enter all the fields");
+    } else showToast("Login to ask question");
   };
   return (
     <div className="ask-question">

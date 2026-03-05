@@ -1,5 +1,5 @@
 .question-details-page {
-  width: calc(100% - 300px - 24px);
+  width: calc(100% - 300px - 40px);
   float: left;
   margin: 25px 0px;
   padding: 0px;
@@ -14,7 +14,11 @@
   display: flex;
 }
 .question-votes {
-  padding: 5px 20px 5px 10px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
 }
 .question-votes p {
   margin: 0%;
@@ -22,13 +26,53 @@
   text-align: center;
 }
 .votes-icon {
-  font-size: 40px;
+  width: 30px;
+  height: 30px;
+  font-size: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
   color: rgb(206, 203, 203);
+  border: 1px solid transparent;
+  border-radius: 50%;
+  padding: 2px;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
 }
-.votes-icon:active {
+.votes-icon.active {
   color: #ef8236;
+  border: 1px solid #ef8236;
+  background-color: rgba(239, 130, 54, 0.15);
 }
+
+.bookmark-icon-btn {
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  background: transparent;
+  color: #6a737c;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bookmark-icon-btn:hover {
+  color: #9ecdf5;
+  border-color: #9ecdf5;
+  background-color: rgba(10, 149, 255, 0.08);
+}
+
+.bookmark-icon-btn.active {
+  color: #0a95ff;
+  border-color: #0a95ff;
+  background-color: rgba(10, 149, 255, 0.12);
+}
+
 .question-details-container .question-body {
   line-height: 1.6;
   color: #3a3a3a;
@@ -460,4 +504,17 @@ body.dark-mode .comment-input {
   background-color: #3d3d3e;
   color: #d2d6d8;
   border-color: #4d4d4e;
+}
+
+.vote-toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background-color: #d73a49;
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  z-index: 2000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }

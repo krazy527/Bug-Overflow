@@ -6,6 +6,7 @@ import "./Auth.css";
 import icon from "../../assets/bugOverflow.png";
 import AboutAuth from "./AboutAuth";
 import { signup, login, clearAuthError } from "../../actions/auth";
+import { showToast } from "../../utils/toast";
 const Auth = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [name, setName] = useState("");
@@ -28,12 +29,12 @@ const Auth = () => {
     e.preventDefault();
     dispatch(clearAuthError());
     if (!email && !password) {
-      alert("Enter email and password");
+      showToast("Enter email and password");
       return;
     }
     if (isSignup) {
       if (!name) {
-        alert("Enter a name to continue");
+        showToast("Enter a name to continue");
         return;
       }
       dispatch(signup({ name, email, password }, navigate));
