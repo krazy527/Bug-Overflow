@@ -16,6 +16,11 @@ API.interceptors.request.use((req) => {
 
 export const logIn = (authData) => API.post("/user/login", authData);
 export const signUp = (authData) => API.post("/user/signup", authData);
+export const verifySignupOtp = (payload) => API.post("/user/verify-signup-otp", payload);
+export const resendSignupOtp = (payload) => API.post("/user/resend-signup-otp", payload);
+export const forgotPassword = (payload) => API.post("/user/forgot-password", payload);
+export const verifyResetOtp = (payload) => API.post("/user/verify-reset-otp", payload);
+export const resetPassword = (payload) => API.post("/user/reset-password", payload);
 
 export const postQuestion = (questionData) =>
   API.post("/questions/Ask", questionData);

@@ -41,7 +41,7 @@
 
 .navbar .navbar-1 .search-bar-container {
   flex-grow: 1;
-  max-width: 450px;
+  max-width: 40vw;
 }
 
 .navbar .navbar-2 {
