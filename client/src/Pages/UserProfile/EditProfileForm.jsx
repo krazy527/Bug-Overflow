@@ -28,23 +28,26 @@ const EditProfileForm = ({ currentUser, currentProfile, setSwitch }) => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (tags.length === 0) {
-      showToast("Update tags field");
-    } else {
-      dispatch(
-        updateProfile(currentUser?.result?._id, {
-          name,
-          about,
-          tags,
-          location,
-          links: {
-            website,
-            x: xLink,
-            github,
-          },
-        })
-      );
+
+    if (!name?.trim()) {
+      showToast("Display name is required");
+      return;
     }
+
+    dispatch(
+      updateProfile(currentUser?.result?._id, {
+        name: name.trim(),
+        about,
+        tags: Array.isArray(tags) ? tags.filter((tag) => tag?.trim()) : [],
+        location,
+        links: {
+          website: website.trim(),
+          x: xLink.trim(),
+          github: github.trim(),
+        },
+      })
+    );
+    showToast("Profile updated", "success");
     setSwitch(false);
   };
 

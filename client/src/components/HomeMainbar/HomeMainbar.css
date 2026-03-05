@@ -79,7 +79,7 @@
 
 .display-question-container .display-votes-ans.has-answers .stats-value,
 .display-question-container .display-votes-ans.has-answers .stats-label {
-    color: #2e7d32;
+    color: #2e7d32 !important;
     font-weight: 600;
 }
 .display-question-container .display-votes-ans.has-answers {

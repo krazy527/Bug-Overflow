@@ -8,6 +8,7 @@ import { faCaretUp, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import Avatar from "../../components/Avatar/Avatar";
 import { deleteAnswer, voteAnswer, acceptAnswer, addAnswerComment, deleteAnswerComment } from "../../actions/question";
 import { showToast } from "../../utils/toast";
+import HtmlWithCopyCode from "../../components/HtmlWithCopyCode/HtmlWithCopyCode";
 
 const DisplayAnswer = ({ question, handleShare }) => {
   const User = useSelector((state) => state.currentUserReducer);
@@ -116,10 +117,10 @@ const DisplayAnswer = ({ question, handleShare }) => {
                 )}
               </div>
               <div className="answer-main-content">
-                <div
+                <HtmlWithCopyCode
                   className="answer-body"
-                  dangerouslySetInnerHTML={{ __html: ans.answerBody }}
-                ></div>
+                  html={ans.answerBody}
+                />
                 <div className="question-actions-user">
                   <div>
                     <button type="button" onClick={handleShare}>Share</button>

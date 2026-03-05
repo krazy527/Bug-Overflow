@@ -110,3 +110,20 @@
     display: none;
   }
 }
+
+body.dark-mode .auth-container-2 form {
+  background-color: #2d2d2e;
+  box-shadow: none;
+  border: 1px solid #3d3d3e;
+}
+
+body.dark-mode .auth-container-2 form label input {
+  background-color: #3d3d3e;
+  border-color: #4d4d4e;
+  color: #d2d6d8;
+}
+
+body.dark-mode .auth-container-2 form h4,
+body.dark-mode .auth-container-2 p {
+  color: #d2d6d8;
+}

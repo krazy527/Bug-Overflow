@@ -10,6 +10,7 @@ import "./Questions.css";
 import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
 import TextEditor from "../../components/TextEditor/TextEditor";
+import HtmlWithCopyCode from "../../components/HtmlWithCopyCode/HtmlWithCopyCode";
 import {
   postAnswer,
   deleteQuestion,
@@ -142,6 +143,12 @@ const QuestionsDetails = () => {
               return (
                 <div key={question._id}>
                   <section className="question-details-container">
+                    <h1 style={{marginBottom: 5}}>
+                      {question.questionTitle}
+                      {question.acceptedAnswer && (
+                        <span className="question-status-badge status-answered">Answered</span>
+                      )}
+                    </h1>
                     <div className="question-meta-stats">
                       <span>Asked {moment(question.askedOn).fromNow()}</span>
                       <span>Views {question.views || 0}</span>
@@ -150,12 +157,6 @@ const QuestionsDetails = () => {
                       </span>
                       <span>Answers {question.noOfAnswers}</span>
                     </div>
-                    <h1>
-                      {question.questionTitle}
-                      {question.acceptedAnswer && (
-                        <span className="question-status-badge status-answered">Answered</span>
-                      )}
-                    </h1>
                     <div className="question-details-container-2">
                       <div className="question-votes">
                         <FontAwesomeIcon
@@ -189,10 +190,10 @@ const QuestionsDetails = () => {
                         </button>
                       </div>
                       <div style={{ width: "100%" }}>
-                        <div
+                        <HtmlWithCopyCode
                           className="question-body"
-                          dangerouslySetInnerHTML={{ __html: question.questionBody }}
-                        ></div>
+                          html={question.questionBody}
+                        />
                         <div className="question-details-tags">
                           {(Array.isArray(question.questionTags)
                             ? question.questionTags

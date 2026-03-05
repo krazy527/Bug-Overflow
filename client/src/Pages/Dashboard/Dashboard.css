@@ -124,14 +124,14 @@
 /* Badges */
 .badges-container {
   display: flex;
-  gap: 16px;
+  gap: 24px;
   margin-bottom: 12px;
 }
 
 .rep-badge {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: 13px;
 }
 

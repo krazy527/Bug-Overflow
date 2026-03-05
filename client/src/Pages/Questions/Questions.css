@@ -1,5 +1,5 @@
 .question-details-page {
-  width: calc(100% - 300px - 40px);
+  width: calc(100% - 300px - 70px);
   float: left;
   margin: 25px 0px;
   padding: 0px;
@@ -113,9 +113,10 @@
 .question-details-container .question-body pre {
   background-color: #f4f4f4;
   border-radius: 3px;
-  padding: 10px;
+  padding: 34px 10px 10px;
   overflow-x: auto;
   margin: 10px 0;
+  position: relative;
 }
 
 .question-details-container .question-body ol,
@@ -264,9 +265,29 @@
 .display-ans .answer-body pre {
   background-color: #f4f4f4;
   border-radius: 3px;
-  padding: 10px;
+  padding: 34px 10px 10px;
   overflow-x: auto;
   margin: 10px 0;
+  position: relative;
+}
+
+.code-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 1px solid #d6d9dc;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #3b4045;
+  font-size: 12px;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.code-copy-btn:hover {
+  background: #f8f9f9;
+  border-color: #b9bec4;
 }
 
 .display-ans .answer-body ol,
@@ -504,6 +525,16 @@ body.dark-mode .comment-input {
   background-color: #3d3d3e;
   color: #d2d6d8;
   border-color: #4d4d4e;
+}
+
+body.dark-mode .code-copy-btn {
+  background: #3d3d3e;
+  color: #d2d6d8;
+  border-color: #4d4d4e;
+}
+
+body.dark-mode .code-copy-btn:hover {
+  background: #4a4a4b;
 }
 
 .vote-toast {

@@ -147,3 +147,29 @@
     font-size: 24px;
   }
 }
+
+body.dark-mode .ask-question {
+  background-color: #1a1a1b;
+}
+
+body.dark-mode .ask-ques-container form .ask-form-container {
+  background-color: #2d2d2e;
+  box-shadow: none;
+  border: 1px solid #3d3d3e;
+}
+
+body.dark-mode .ask-form-container label h4,
+body.dark-mode .ask-form-container label p,
+body.dark-mode .ask-ques-container h1 {
+  color: #d2d6d8;
+}
+
+body.dark-mode .ask-ques-body-container {
+  border-bottom-color: #3d3d3e;
+}
+
+body.dark-mode .tag-chip {
+  background-color: #2d3e50;
+  color: #88c4f4;
+  border-color: #2d5985;
+}

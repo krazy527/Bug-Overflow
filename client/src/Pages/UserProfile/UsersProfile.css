@@ -127,7 +127,7 @@
 
 .summary-cards-grid {
   display: grid;
-  grid-template-columns: 1.2fr 1fr 0.8fr;
+  grid-template-columns: 1.2fr 1.2fr 0.7fr;
   gap: 14px;
   margin-bottom: 16px;
 }
@@ -139,6 +139,10 @@
   border-radius: 6px;
   background: #fff;
   padding: 14px;
+}
+
+.badge-card .badgeRow{
+  margin: 12px 0;
 }
 
 .summary-card h4,
@@ -164,40 +168,8 @@
 
 .badge-inline-stats {
   display: flex;
-  gap: 12px;
+  gap: 24px;
   font-size: 13px;
-}
-
-.badge-inline-stats .rep-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.badge-inline-stats .badge-dot {
-  display: inline-flex;
-  align-items: center;
-}
-
-.badge-inline-stats .badge-level {
-  color: #6a737c;
-  text-transform: capitalize;
-}
-
-.badge-inline-stats .badge-count {
-  font-weight: 600;
-}
-
-.badge-item.gold {
-  color: #9a6800;
-}
-
-.badge-item.silver {
-  color: #6a737c;
-}
-
-.badge-item.bronze {
-  color: #965300;
 }
 
 .profile-section-grid {
@@ -481,4 +453,64 @@
   .edit-profile-form label select {
     width: 100%;
   }
+}
+
+body.dark-mode .profile-top-header,
+body.dark-mode .list-row,
+body.dark-mode .edit-profile-title {
+  border-color: #3d3d3e;
+}
+
+body.dark-mode .summary-card,
+body.dark-mode .profile-box,
+body.dark-mode .badge-card,
+body.dark-mode .edit-profile-form,
+body.dark-mode .links-section,
+body.dark-mode .edit-profile-btn {
+  background-color: #2d2d2e;
+  border-color: #3d3d3e;
+  color: #d2d6d8;
+}
+
+body.dark-mode .user-name h1,
+body.dark-mode .user-name h3,
+body.dark-mode .summary-big-number,
+body.dark-mode .summary-card h4,
+body.dark-mode .profile-box h3,
+body.dark-mode .section-title,
+body.dark-mode .profile-left-nav h4,
+body.dark-mode .profile-left-nav li,
+body.dark-mode .summary-muted,
+body.dark-mode .empty-text,
+body.dark-mode .date-text,
+body.dark-mode .links-grid label p,
+body.dark-mode .edit-profile-title-2 {
+  color: #d2d6d8;
+}
+
+body.dark-mode .user-name p,
+body.dark-mode .badge-inline-stats .badge-level {
+  color: #b0b6bb;
+}
+
+body.dark-mode .profile-left-nav li.active {
+  background: #3d3d3e;
+  color: #f2f4f5;
+}
+
+body.dark-mode .pill {
+  border-color: #4d4d4e;
+  color: #d2d6d8;
+}
+
+body.dark-mode .tag-chip-simple,
+body.dark-mode .tag-chip {
+  background-color: #2d3e50;
+  color: #88c4f4;
+  border-color: #2d5985;
+}
+
+body.dark-mode .list-link,
+body.dark-mode .profile-external-link {
+  color: #88c4f4;
 }

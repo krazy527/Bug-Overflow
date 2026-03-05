@@ -269,3 +269,23 @@ body.dark-mode .notification-item.unread {
 body.dark-mode .notification-header {
   border-color: #3d3d3e;
 }
+
+body.dark-mode .dark-mode-toggle,
+body.dark-mode .notification-btn,
+body.dark-mode .nav-links {
+  color: #d2d6d8;
+}
+
+body.dark-mode .dark-mode-toggle:hover,
+body.dark-mode .notification-btn:hover {
+  background-color: #3d3d3e;
+}
+
+body.dark-mode .nav-links {
+  background-color: #2d3e50;
+  border-color: #2d5985;
+}
+
+body.dark-mode .nav-links:hover {
+  background-color: #36506b;
+}
