@@ -1,19 +1,40 @@
 import { BrowserRouter as Router } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
 import AllRoutes from "./AllRoutes";
 import { fetchAllQuestions } from "./actions/question";
 import { fetchAllUsers } from "./actions/users";
+import { fetchNotifications } from "./actions/notifications";
 
 function App() {
   const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUserReducer);
+
+  const [darkMode, setDarkMode] = useState(() => {
+    return localStorage.getItem("darkMode") === "true";
+  });
 
   useEffect(() => {
     dispatch(fetchAllQuestions());
     dispatch(fetchAllUsers());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (currentUser?.token) {
+      dispatch(fetchNotifications());
+    }
+  }, [currentUser, dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("darkMode", darkMode);
+    if (darkMode) {
+      document.body.classList.add("dark-mode");
+    } else {
+      document.body.classList.remove("dark-mode");
+    }
+  }, [darkMode]);
 
   const [slideIn, setSlideIn] = useState(true);
 
@@ -30,9 +51,9 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className={`App${darkMode ? " dark-mode" : ""}`}>
       <Router>
-        <Navbar handleSlideIn={handleSlideIn} />
+        <Navbar handleSlideIn={handleSlideIn} darkMode={darkMode} setDarkMode={setDarkMode} />
         <AllRoutes slideIn={slideIn} handleSlideIn={handleSlideIn} />
       </Router>
     </div>

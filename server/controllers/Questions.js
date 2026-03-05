@@ -1,5 +1,6 @@
 import Questions from "../models/Questions.js";
 import mongoose from "mongoose";
+import { updateReputation, addNotification } from "../utils/reputation.js";
 
 export const AskQuestion = async (req, res) => {
   const postQuestionData = req.body;
@@ -7,6 +8,8 @@ export const AskQuestion = async (req, res) => {
   const postQuestion = new Questions({ ...postQuestionData, userId });
   try {
     await postQuestion.save();
+    // Award "Student" badge for asking first question (no rep delta)
+    updateReputation(userId, 0, { hasAskedQuestion: true }).catch(console.error);
     res.status(200).json("Posted a question successfully");
   } catch (error) {
     console.log(error);
@@ -44,7 +47,7 @@ export const searchQuestions = async (req, res) => {
 
     const total = await Questions.countDocuments(searchFilter);
     const questionList = await Questions.find(searchFilter)
-      .select("_id questionTitle questionBody questionTags noOfAnswers upVote downVote askedOn userPosted userId")
+      .select("_id questionTitle questionBody questionTags noOfAnswers upVote downVote askedOn userPosted userId views status")
       .sort({ askedOn: -1 })
       .skip(skipNum)
       .limit(limitNum)
@@ -88,30 +91,53 @@ export const voteQuestion = async (req, res) => {
       (id) => id === String(userId)
     );
 
+    let repDelta = 0;
+
     if (value === "upVote") {
       if (downIndex !== -1) {
         question.downVote = question.downVote.filter(
           (id) => id !== String(userId)
         );
+        repDelta += 5; // reversing a downvote
       }
       if (upIndex === -1) {
         question.upVote.push(userId);
+        repDelta += 5;
       } else {
         question.upVote = question.upVote.filter((id) => id !== String(userId));
+        repDelta -= 5;
       }
     } else if (value === "downVote") {
       if (upIndex !== -1) {
         question.upVote = question.upVote.filter((id) => id !== String(userId));
+        repDelta -= 5; // reversing an upvote
       }
       if (downIndex === -1) {
         question.downVote.push(userId);
+        repDelta -= 5;
       } else {
         question.downVote = question.downVote.filter(
           (id) => id !== String(userId)
         );
+        repDelta += 5;
       }
     }
     await Questions.findByIdAndUpdate(_id, question);
+
+    // Update question author's reputation and notify
+    if (repDelta !== 0 && question.userId) {
+      const stats = { questionUpVotes: question.upVote.length };
+      updateReputation(question.userId, repDelta, stats).catch(console.error);
+
+      if (repDelta > 0 && String(question.userId) !== String(userId)) {
+        addNotification(
+          question.userId,
+          `Your question "${question.questionTitle}" received an upvote.`,
+          `/Questions/${_id}`
+        ).catch(console.error);
+      }
+    }
+
     res.status(200).json({ message: "voted successfully..." });
   } catch (error) {
     res.status(404).json({ message: "id not found" });

@@ -10,6 +10,8 @@ import Tags from "./Pages/Tags/Tags";
 import Users from "./Pages/Users/Users";
 import UserProfile from "./Pages/UserProfile/UserProfile";
 import SearchPage from "./Pages/Search/Search";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import Bookmarks from "./Pages/Bookmarks/Bookmarks";
 
 const AllRoutes = ({ slideIn, handleSlideIn }) => {
   return (
@@ -44,6 +46,14 @@ const AllRoutes = ({ slideIn, handleSlideIn }) => {
         element={
           <UserProfile slideIn={slideIn} handleSlideIn={handleSlideIn} />
         }
+      />
+      <Route
+        path="/Dashboard"
+        element={<Dashboard slideIn={slideIn} handleSlideIn={handleSlideIn} />}
+      />
+      <Route
+        path="/Bookmarks"
+        element={<Bookmarks slideIn={slideIn} handleSlideIn={handleSlideIn} />}
       />
     </Routes>
   );

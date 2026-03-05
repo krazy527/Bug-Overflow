@@ -12,6 +12,8 @@ export const getAllUsers = async (req, res) => {
         about: user.about,
         tags: user.tags,
         joinedOn: user.joinedOn,
+        reputation: user.reputation,
+        badges: user.badges,
       });
     });
     res.status(200).json(allUserDetails);
@@ -125,5 +127,21 @@ export const updateProfile = async (req, res) => {
     res.status(200).json(updatedProfile);
   } catch (error) {
     res.status(405).json({ message: error.message });
+  }
+};
+
+export const getReputation = async (req, res) => {
+  const { id: _id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(404).json({ message: "Invalid user id" });
+  }
+
+  try {
+    const user = await users.findById(_id).select("name reputation badges").lean();
+    if (!user) return res.status(404).json({ message: "User not found" });
+    res.status(200).json({ name: user.name, reputation: user.reputation, badges: user.badges });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

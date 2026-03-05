@@ -38,3 +38,35 @@ export const searchTags = (query, limit = 10) =>
   API.get(`/user/tags/search?query=${query}&limit=${limit}`);
 export const updateProfile = (id, updateData) =>
   API.patch(`/user/update/${id}`, updateData);
+
+// Answer operations
+export const acceptAnswer = (questionId, answerId) =>
+  API.patch(`/answer/accept/${questionId}`, { answerId });
+export const voteAnswer = (questionId, answerId, value) =>
+  API.patch(`/answer/vote/${questionId}/${answerId}`, { value });
+
+// View tracking
+export const incrementView = (id) => API.patch(`/views/${id}`);
+
+// Comments
+export const addQuestionComment = (questionId, commentBody, userCommented) =>
+  API.post(`/comments/question/${questionId}`, { commentBody, userCommented });
+export const addAnswerComment = (questionId, answerId, commentBody, userCommented) =>
+  API.post(`/comments/answer/${questionId}`, { answerId, commentBody, userCommented });
+export const deleteQuestionComment = (questionId, commentId) =>
+  API.delete(`/comments/question/${questionId}/${commentId}`);
+export const deleteAnswerComment = (questionId, answerId, commentId) =>
+  API.delete(`/comments/answer/${questionId}/${answerId}/${commentId}`);
+
+// Bookmarks
+export const getBookmarks = () => API.get('/bookmarks/');
+export const addBookmark = (questionId) => API.post('/bookmarks/add', { questionId });
+export const removeBookmark = (questionId) => API.delete('/bookmarks/remove', { data: { questionId } });
+
+// Notifications
+export const getNotifications = () => API.get('/notifications/');
+export const markNotificationRead = (id) => API.patch(`/notifications/read/${id}`);
+export const markAllNotificationsRead = () => API.patch('/notifications/readAll');
+
+// Reputation
+export const getUserReputation = (id) => API.get(`/user/reputation/${id}`);

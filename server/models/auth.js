@@ -7,6 +7,21 @@ const userSchema = mongoose.Schema({
   about: { type: String },
   tags: { type: [String] },
   joinedOn: { type: Date, default: Date.now },
+  reputation: { type: Number, default: 1 },
+  badges: {
+    bronze: { type: [String], default: [] },
+    silver: { type: [String], default: [] },
+    gold: { type: [String], default: [] },
+  },
+  bookmarks: { type: [String], default: [] },
+  notifications: [
+    {
+      message: { type: String, required: true },
+      link: { type: String },
+      read: { type: Boolean, default: false },
+      createdAt: { type: Date, default: Date.now },
+    },
+  ],
 });
 
 export default mongoose.model("User", userSchema);
