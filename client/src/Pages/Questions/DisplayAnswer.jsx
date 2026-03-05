@@ -141,7 +141,7 @@ const DisplayAnswer = ({ question, handleShare }) => {
                       style={{ color: "#0086d8" }}
                     >
                       <Avatar
-                        backgroundColor="lightgreen"
+                        seed={ans.userAnswered}
                         px="8px"
                         py="5px"
                         borderRadius="4px"

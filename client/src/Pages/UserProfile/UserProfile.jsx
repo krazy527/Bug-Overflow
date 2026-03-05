@@ -96,7 +96,7 @@ const UserProfile = ({ slideIn, handleSlideIn }) => {
                   <div className="user-details-container profile-top-header">
                       <div className="user-details">
                           <Avatar
-                              backgroundColor="purple"
+                              seed={currentProfile?.name}
                               color="white"
                               fontSize="36px"
                               px="28px"

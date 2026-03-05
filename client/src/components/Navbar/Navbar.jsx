@@ -73,7 +73,7 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
           <Link to="/" className="nav-item nav-logo">
             <img src={logo} height={40} alt="logo" />
           </Link>
-          <Link to="/" className="nav-item nav-btn res-nav">
+          <Link to="/About" className="nav-item nav-btn res-nav">
             About
           </Link>
           <SearchBar />
@@ -137,7 +137,7 @@ const Navbar = ({ handleSlideIn, darkMode, setDarkMode }) => {
                 style={{ color: "white", textDecoration: "none", padding: "10px" }}
               >
                 <Avatar
-                  backgroundColor="#009dff"
+                  seed={User.result.name}
                   px="12px"
                   py="7px"
                   borderRadius="50%"

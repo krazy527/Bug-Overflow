@@ -12,7 +12,7 @@ const HtmlWithCopyCode = ({ html, className }) => {
     const codeBlocks = container.querySelectorAll("pre");
 
     codeBlocks.forEach((pre) => {
-      if (pre.querySelector(".code-copy-btn")) return;
+      if (pre.parentElement?.classList.contains("code-block-wrapper")) return;
 
       const copyBtn = document.createElement("button");
       copyBtn.type = "button";
@@ -33,7 +33,11 @@ const HtmlWithCopyCode = ({ html, className }) => {
         }
       };
 
-      pre.appendChild(copyBtn);
+      const wrapper = document.createElement("div");
+      wrapper.className = "code-block-wrapper";
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+      wrapper.appendChild(copyBtn);
     });
   }, [html]);
 

@@ -9,6 +9,7 @@ import {
     faUsers,
     faBookmark,
     faNewspaper,
+    faCircleInfo,
 } from '@fortawesome/free-solid-svg-icons';
 
 const LeftSidebar = ({ slideIn, handleSlideIn }) => {
@@ -85,6 +86,17 @@ const LeftSidebar = ({ slideIn, handleSlideIn }) => {
                         >
                             <FontAwesomeIcon icon={faUsers} className="side-nav-icon" />
                             <span className="side-nav-text">Users</span>
+                        </NavLink>
+                    </button>
+                    <button onClick={() => handleSlideIn()} className="nav-btn">
+                        <NavLink
+                            to="/About"
+                            className={({ isActive }) =>
+                                `side-nav-links ${isActive ? 'active' : ''}`
+                            }
+                        >
+                            <FontAwesomeIcon icon={faCircleInfo} className="side-nav-icon" />
+                            <span className="side-nav-text">About</span>
                         </NavLink>
                     </button>
                 </div>

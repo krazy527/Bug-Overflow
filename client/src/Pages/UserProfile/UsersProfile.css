@@ -10,7 +10,7 @@
 }
 
 .profile-top-header {
-  border-bottom: 1px solid #e3e6e8;
+  border-bottom: 1px solid var(--color-border-soft);
   padding-bottom: 16px;
   margin-bottom: 16px;
 }
@@ -55,7 +55,7 @@
   padding: 8px 10px;
   border: 1px solid #7e7e7e;
   border-radius: 4px;
-  background-color: white;
+  background-color: var(--color-bg-card);
   cursor: pointer;
   transition: 0.2s;
   font-size: 12px;
@@ -110,8 +110,8 @@
 }
 
 .profile-left-nav li.active {
-  background: #f1f2f3;
-  color: #0c0d0e;
+  background: var(--color-bg-page);
+  color: var(--color-text-primary);
   font-weight: 600;
 }
 
@@ -135,9 +135,9 @@
 .summary-card,
 .profile-box,
 .badge-card {
-  border: 1px solid #d6d9dc;
+  border: 1px solid var(--color-border-default);
   border-radius: 6px;
-  background: #fff;
+  background: var(--color-bg-card);
   padding: 14px;
 }
 
@@ -200,7 +200,7 @@
 }
 
 .list-link {
-  color: #0074cc;
+  color: var(--color-link);
   text-decoration: none;
   flex: 1;
 }
@@ -212,7 +212,7 @@
 .pill {
   min-width: 24px;
   text-align: center;
-  border: 1px solid #d6d9dc;
+  border: 1px solid var(--color-border-default);
   border-radius: 4px;
   color: #3b4045;
   font-size: 12px;
@@ -227,8 +227,8 @@
 
 .tag-chip-simple {
   padding: 3px 8px;
-  background: #e1ecf4;
-  color: #39739d;
+  background: var(--color-bg-tag);
+  color: var(--color-link-2);
   border-radius: 3px;
   font-size: 12px;
 }
@@ -309,7 +309,7 @@
 }
 
 .links-section {
-  border: 1px solid #d6d9dc;
+  border: 1px solid var(--color-border-default);
   border-radius: 8px;
   padding: 14px;
   margin-bottom: 20px;
@@ -430,7 +430,7 @@
 }
 
 .profile-external-link {
-  color: #0074cc;
+  color: var(--color-link);
   text-decoration: none;
   font-size: 13px;
 }

@@ -189,7 +189,7 @@ const QuestionsDetails = () => {
                           <FontAwesomeIcon icon={faBookmark} />
                         </button>
                       </div>
-                      <div style={{ width: "100%" }}>
+                      <div className="question-content-column">
                         <HtmlWithCopyCode
                           className="question-body"
                           html={question.questionBody}
@@ -225,7 +225,7 @@ const QuestionsDetails = () => {
                               style={{ color: "#0086d8" }}
                             >
                               <Avatar
-                                backgroundColor="orange"
+                                seed={question.userPosted}
                                 px="8px"
                                 py="5px"
                                 borderRadius="4px"

@@ -18,15 +18,15 @@
 .main-bar-header .ask-btn {
     padding: 10px 15px;
     border-radius: 4px;
-    background-color: #009dff;
-    color: white;
+    background-color: var(--color-brand-primary-alt);
+    color: var(--color-text-on-brand);
     border: none;
     text-decoration: none;
     transition: 0.3s;
 }
 
 .main-bar-header .ask-btn:hover {
-    background-color: #0086d8;
+    background-color: var(--color-brand-primary-hover);
 }
 
 .display-question-container {
@@ -35,12 +35,12 @@
     display: flex;
     align-items: flex-start;
     /* background-color: #fcfbf8; */
-    border-bottom: solid 1px #edeff0;
+    border-bottom: solid 1px var(--color-border-subtle);
     margin-block: 12px;
 }
 
 .display-question-container:first-of-type {
-    border-top: solid 1px #edeff0;
+    border-top: solid 1px var(--color-border-subtle);
 }
 
 .display-stats-column {
@@ -67,23 +67,23 @@
 .display-question-container .display-votes-ans .stats-value {
     font-size: 13px;
     font-weight: 600;
-    color: #3b4045;
+    color: var(--color-text-primary);
     line-height: 1.2;
 }
 
 .display-question-container .display-votes-ans .stats-label {
     font-size: 11px;
-    color: #6a737c;
+    color: var(--color-text-secondary);
     line-height: 1.2;
 }
 
 .display-question-container .display-votes-ans.has-answers .stats-value,
 .display-question-container .display-votes-ans.has-answers .stats-label {
-    color: #2e7d32 !important;
+    color: var(--color-success) !important;
     font-weight: 600;
 }
 .display-question-container .display-votes-ans.has-answers {
-    border: 1px solid #2e7d32;
+    border: 1px solid var(--color-success);
     border-radius: 6px;
     padding: 4px 6px;
 }
@@ -96,12 +96,12 @@
 
 .question-title-link {
     text-decoration: none;
-    color: #037ecb;
+    color: var(--color-link);
     transition: 0.3s;
 }
 
 .question-title-link:hover {
-    color: #009dff;
+    color: var(--color-brand-primary-alt);
 }
 
 .display-tags-time .display-tags {
@@ -122,8 +122,8 @@
     margin: 2px;
     padding: 4px;
     font-size: 13px;
-    background-color: #edeff0;
-    color: #39739d;
+    background-color: var(--color-border-subtle);
+    color: var(--color-link-2);
 }
 .display-tags-time .display-time {
     font-size: 13px;
@@ -142,7 +142,7 @@
 .skeleton-line {
     display: inline-block;
     border-radius: 4px;
-    background: linear-gradient(90deg, #f1f2f3 25%, #e3e6e8 50%, #f1f2f3 75%);
+    background: linear-gradient(90deg, var(--color-bg-page) 25%, var(--color-border-soft) 50%, var(--color-bg-page) 75%);
     background-size: 200% 100%;
     animation: skeleton-loading 1.2s ease-in-out infinite;
 }
@@ -178,7 +178,7 @@
 }
 
 body.dark-mode .skeleton-line {
-    background: linear-gradient(90deg, #3d3d3e 25%, #4d4d4e 50%, #3d3d3e 75%);
+    background: linear-gradient(90deg, var(--color-dark-surface) 25%, var(--color-dark-border) 50%, var(--color-dark-surface) 75%);
     background-size: 200% 100%;
 }
 

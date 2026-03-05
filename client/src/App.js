@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import AllRoutes from "./AllRoutes";
 import ToastContainer from "./components/Toast/ToastContainer";
 import { fetchAllQuestions } from "./actions/question";
@@ -58,6 +59,7 @@ function App() {
       <Router>
         <Navbar handleSlideIn={handleSlideIn} darkMode={darkMode} setDarkMode={setDarkMode} />
         <AllRoutes slideIn={slideIn} handleSlideIn={handleSlideIn} />
+        <Footer />
         <ToastContainer />
       </Router>
     </div>
