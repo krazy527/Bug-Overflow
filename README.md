@@ -213,8 +213,22 @@ Install the necessary dependencies
 Add a config.env file in the root directory and enter your MongoDb Atlas and JWT Secret key 
 The format of .env file should be similar to the following
 ```
-CONNECTION_URL = "Mongo db url"
-JWT_SECRET = "This could be anything like test"
+# -----------------------------
+# Core server configuration
+# -----------------------------
+PORT=5000
+CONNECTION_URL="mongodb+srv://<username>:<password>@cluster.mongodb.net/<db-name>?retryWrites=true&w=majority"
+JWT_SECRET="replace-with-a-strong-random-secret"
+
+# -----------------------------
+# SMTP configuration (for OTP emails)
+# -----------------------------
+SMTP_HOST="smtp.gmail.com"
+SMTP_PORT=587
+SMTP_USER="your-email@example.com"
+SMTP_PASS="your-app-password-or-smtp-password"
+SMTP_SECURE=false
+SMTP_FROM="BugOverflow <no-reply@bugoverflow.com>"
 ```
 To start the server in development mode
 
