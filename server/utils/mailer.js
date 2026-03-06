@@ -1,4 +1,6 @@
 import nodemailer from "nodemailer";
+import dotenv from "dotenv";
+dotenv.config();
 
 const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER || "no-reply@bugoverflow.local";
 
